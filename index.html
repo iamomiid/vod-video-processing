@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>VideoJS</title>
+		<link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet" />
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			video,
+			.video-js {
+				width: 100vw;
+				height: 100vh;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+
+	<body>
+		<video id="example-video" class="video-js vjs-default-skin" controls>
+			<source
+				src="https://tandori.arvanvod.com/VbEMEZ7JGv/wZbxJLOPlo/h_,144_200,240_400,360_800,480_1500,720_2500,1080_3351,k.mp4.list/master.m3u8"
+				type="application/x-mpegURL"
+			/>
+			<source
+				src="https://tandori.arvanvod.com/VbEMEZ7JGv/wZbxJLOPlo/h_,144_200,240_400,360_800,480_1500,720_2500,1080_3351,k.mp4.list/manifest.mpd"
+				type="application/dash+xml"
+			/>
+		</video>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="https://unpkg.com/video.js/dist/video.js"></script>
+		<script>
+			var player = videojs('example-video');
+			player.play();
+		</script>
+	</body>
+</html>
