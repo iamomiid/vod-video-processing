@@ -1,18 +1,18 @@
 # Video Proecessing
 
-Start the application by `python3 -m http.server`.
+Server root folder by `python3 -m http.server`.
 
 Make sure that `ffmpeg` and `Bento4` tools are installed and included in PATH.
 
-Set DASH audio output bitrate to maximum quality bitrate. Currently it is set to `720p` and `256k`.
+Set audio output bitrate to maximum quality bitrate. It is currently set to `720p` quality and `256k` bitrate.
 
-## Scripts
+# Scripts
 
-### DASH
+## DASH
 
 Takes `input.mp4`. Generates multiple bitrate outputs. Then generates fragmented and finally encrypted outputs. The sample `mp4encrypt` command uses 1 key for encryption although multiple keys can be provided. Then deletes all `tmp` files.
 
-### HLS
+## HLS
 
 Takes `input.mp4`. Creates folders for different qualities. Then generates sequences and master files for each quality. Final master file is included in project root. Encryption can be done using either encryption key or licensing server. Current flow uses licensing server. First line of `key.info` is the server endpoint, and the second line is the name of the encryption key. The `key.bin` is a binary file representing the encryption key. Use command below to generate binary file from text file.
 
@@ -20,7 +20,7 @@ Takes `input.mp4`. Creates folders for different qualities. Then generates seque
 xxd -r -p input.txt key.bin
 ```
 
-## Recommended Video and Audio Bitrates
+# Recommended Video and Audio Bitrates
 
 |    Quality     | Video Bitrate | Audio Bitrate |
 | :------------: | :-----------: | :-----------: |
@@ -37,7 +37,7 @@ This chart is [ArvanCloud default profile](https://www.arvancloud.com/help/fa/ar
 
 Video height is calculated based on video ratio and width.
 
-## License Server
+# License Server
 
 Navigate to `server`. Install dependencies ( `yarn install` ) and start( `yarn start` ).
 
@@ -50,3 +50,21 @@ DASH endpoint handles a `POST` request and recieves a json in `application/octet
 For more information on DASH keySystem API, check [this link](https://www.w3.org/TR/encrypted-media/).
 
 As an alternative, you can use `getLicense` method in player config(just DASH).
+
+# Advanced Scripts
+
+Current scripts are so naive. They only demonstrate vital tasks.
+
+I'm going to add advanced scripts that cover all the needs of a VoD platform SOON.
+
+So please either STAR or WATCH this repo.
+
+# Contributions
+
+Contributions, issues and feature requests are welcome.
+
+# License
+
+Copyright © 2020 Omid Seyfan.
+
+This project is licensed under the MIT License - see the LICENSE file for details.
