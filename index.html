@@ -46,13 +46,12 @@
 					.replace(/=*$/, '');
 			};
 			var player = videojs('example-video');
-			player.eme();
+			// player.eme();
 			player.src([
-				// {
-				// 	src:
-				// 		'https://tandori.arvanvod.com/VbEMEZ7JGv/wZbxJLOPlo/h_,144_200,240_400,360_800,480_1500,720_2500,1080_3351,k.mp4.list/master.m3u8',
-				// 	type: 'application/x-mpegURL',
-				// },
+				{
+					src: 'hls/master.m3u8',
+					type: 'application/x-mpegURL',
+				},
 				{
 					src: 'dash/stream.mpd',
 					type: 'application/dash+xml',
