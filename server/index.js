@@ -28,14 +28,7 @@ app.post('/dash', (req, res) => {
 	return res.send(output);
 });
 
-app.post('/hls', (req, res) => {
-	console.log(req.headers);
-	return res.send('hi');
-});
-
 app.get('/hls', (req, res) => {
-	console.log(req.headers);
-	// res.header('content-type', 'application/octet-stream');
 	return res.send(Buffer.from('617D8A125A284DF48E3C6B1866348A3F', 'hex'));
 });
 

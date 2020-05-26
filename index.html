@@ -24,11 +24,6 @@
 		<video id="example-video" class="video-js vjs-default-skin" controls></video>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/3.1.1/dash.all.min.js"
-			integrity="sha256-RYx6+kVtfAQxIe6ofElKV1LwPsIrZUu6nfLN8C94nrU="
-			crossorigin="anonymous"
-		></script>
 		<script src="https://unpkg.com/video.js/dist/video.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/videojs-contrib-eme@3.7.0/dist/videojs-contrib-eme.js"></script>
 		<script>
@@ -48,36 +43,36 @@
 			var player = videojs('example-video');
 			// player.eme();
 			player.src([
-				{
-					src: 'hls/master.m3u8',
-					type: 'application/x-mpegURL',
-				},
+				// {
+				// 	src: 'hls/master.m3u8',
+				// 	type: 'application/x-mpegURL',
+				// },
 				{
 					src: 'dash/stream.mpd',
 					type: 'application/dash+xml',
 					keySystems: {
-						'org.w3.clearkey': 'http://localhost:1111/dash',
-						// 'org.w3.clearkey': {
-						// 	getLicense: function (emeOptions, keyMessage, callback) {
-						// 		let request = JSON.parse(new TextDecoder().decode(keyMessage));
-						// 		console.log(request);
-						// 		let keyObj = {
-						// 			kty: 'oct',
-						// 			alg: 'A128KW',
-						// 			kid: 'syb4lbaiTMWk3HCZVygFnA',
-						// 			k: 'YX2KElooTfSOPGsYZjSKPw',
-						// 		};
-						// 		console.log(emeOptions, keyMessage);
-						// 		callback(
-						// 			null,
-						// 			new TextEncoder().encode(
-						// 				JSON.stringify({
-						// 					keys: [keyObj],
-						// 				})
-						// 			)
-						// 		);
-						// 	},
-						// },
+						// 'org.w3.clearkey': 'http://localhost:1111/dash',
+						'org.w3.clearkey': {
+							getLicense: function (emeOptions, keyMessage, callback) {
+								let request = JSON.parse(new TextDecoder().decode(keyMessage));
+								console.log(request);
+								let keyObj = {
+									kty: 'oct',
+									alg: 'A128KW',
+									kid: 'syb4lbaiTMWk3HCZVygFnA',
+									k: 'YX2KElooTfSOPGsYZjSKPw',
+								};
+								console.log(emeOptions, keyMessage);
+								callback(
+									null,
+									new TextEncoder().encode(
+										JSON.stringify({
+											keys: [keyObj],
+										})
+									)
+								);
+							},
+						},
 					},
 				},
 			]);
