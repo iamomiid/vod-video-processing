@@ -22,21 +22,67 @@
 
 	<body>
 		<video id="example-video" class="video-js vjs-default-skin" controls>
-			<source
+			<!-- <source
 				src="https://tandori.arvanvod.com/VbEMEZ7JGv/wZbxJLOPlo/h_,144_200,240_400,360_800,480_1500,720_2500,1080_3351,k.mp4.list/master.m3u8"
 				type="application/x-mpegURL"
-			/>
-			<source
+			/> -->
+			<!-- <source
 				src="https://tandori.arvanvod.com/VbEMEZ7JGv/wZbxJLOPlo/h_,144_200,240_400,360_800,480_1500,720_2500,1080_3351,k.mp4.list/manifest.mpd"
 				type="application/dash+xml"
-			/>
+			/> -->
 		</video>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/3.1.1/dash.all.min.js"
+			integrity="sha256-RYx6+kVtfAQxIe6ofElKV1LwPsIrZUu6nfLN8C94nrU="
+			crossorigin="anonymous"
+		></script>
 		<script src="https://unpkg.com/video.js/dist/video.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/videojs-contrib-eme@3.7.0/dist/videojs-contrib-eme.js"></script>
 		<script>
+			let toBase64 = (input) => {
+				return btoa(
+					input
+						.match(/\w{2}/g)
+						.map(function (a) {
+							return String.fromCharCode(parseInt(a, 16));
+						})
+						.join('')
+				)
+					.replace(/\+/g, '-')
+					.replace(/\//g, '_')
+					.replace(/=*$/, '');
+			};
 			var player = videojs('example-video');
-			player.play();
+			player.eme();
+			player.src({
+				src: 'dash/dash/stream.mpd',
+				type: 'application/dash+xml',
+				keySystems: {
+					'org.w3.clearkey': {
+						getLicense: function (emeOptions, keyMessage, callback) {
+							let request = JSON.parse(new TextDecoder().decode(keyMessage));
+							console.log(request);
+							let keyObj = {
+								kty: 'oct',
+								alg: 'A128KW',
+								kid: 'syb4lbaiTMWk3HCZVygFnA',
+								k: 'YX2KElooTfSOPGsYZjSKPw',
+							};
+							console.log(emeOptions, keyMessage);
+							callback(
+								null,
+								new TextEncoder().encode(
+									JSON.stringify({
+										keys: [keyObj],
+									})
+								)
+							);
+						},
+					},
+				},
+			});
 		</script>
 	</body>
 </html>
