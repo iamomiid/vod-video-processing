@@ -3,3 +3,4 @@ tmp
 dash
 hls
 node_modules
+.DS_STORE
