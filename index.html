@@ -43,36 +43,36 @@
 			var player = videojs('example-video');
 			// player.eme();
 			player.src([
-				// {
-				// 	src: 'hls/master.m3u8',
-				// 	type: 'application/x-mpegURL',
-				// },
+				{
+					src: 'hls/master.m3u8',
+					type: 'application/x-mpegURL',
+				},
 				{
 					src: 'dash/stream.mpd',
 					type: 'application/dash+xml',
 					keySystems: {
-						// 'org.w3.clearkey': 'http://localhost:1111/dash',
-						'org.w3.clearkey': {
-							getLicense: function (emeOptions, keyMessage, callback) {
-								let request = JSON.parse(new TextDecoder().decode(keyMessage));
-								console.log(request);
-								let keyObj = {
-									kty: 'oct',
-									alg: 'A128KW',
-									kid: 'syb4lbaiTMWk3HCZVygFnA',
-									k: 'YX2KElooTfSOPGsYZjSKPw',
-								};
-								console.log(emeOptions, keyMessage);
-								callback(
-									null,
-									new TextEncoder().encode(
-										JSON.stringify({
-											keys: [keyObj],
-										})
-									)
-								);
-							},
-						},
+						'org.w3.clearkey': 'http://localhost:1111/dash',
+						// 'org.w3.clearkey': {
+						// 	getLicense: function (emeOptions, keyMessage, callback) {
+						// 		let request = JSON.parse(new TextDecoder().decode(keyMessage));
+						// 		console.log(request);
+						// 		let keyObj = {
+						// 			kty: 'oct',
+						// 			alg: 'A128KW',
+						// 			kid: 'syb4lbaiTMWk3HCZVygFnA',
+						// 			k: 'YX2KElooTfSOPGsYZjSKPw',
+						// 		};
+						// 		console.log(emeOptions, keyMessage);
+						// 		callback(
+						// 			null,
+						// 			new TextEncoder().encode(
+						// 				JSON.stringify({
+						// 					keys: [keyObj],
+						// 				})
+						// 			)
+						// 		);
+						// 	},
+						// },
 					},
 				},
 			]);
