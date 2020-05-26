@@ -1,6 +1,6 @@
 #!/bin/bash
 mkdir -p tmp
-ffmpeg -i input.mp4 -vn -acodec aac -ab 128k tmp/audio.mp4 
+ffmpeg -i input.mp4 -vn -acodec aac -ab 256k tmp/audio.mp4 
 ffmpeg -i input.mp4 -an -c:v libx264 -preset veryslow -profile:v high -level 4.2 -b:v 700k -minrate 700k -maxrate 700k -bufsize 1400k -g 96 -keyint_min 96 -sc_threshold 0 -filter:v "scale='trunc(oh*a/2)*2:240'" -pix_fmt yuvj420p tmp/video-240p.mp4 
 ffmpeg -i input.mp4 -an -c:v libx264 -preset veryslow -profile:v high -level 4.2 -b:v 1000k -minrate 1000k -maxrate 1000k -bufsize 2000k -g 96 -keyint_min 96 -sc_threshold 0 -filter:v "scale='trunc(oh*a/2)*2:360'" -pix_fmt yuvj420p tmp/video-360p.mp4
 ffmpeg -i input.mp4 -an -c:v libx264 -preset veryslow -profile:v high -level 4.2 -b:v 1500k -minrate 1500k -maxrate 1500k -bufsize 3000k -g 96 -keyint_min 96 -sc_threshold 0 -filter:v "scale='trunc(oh*a/2)*2:480'" -pix_fmt yuvj420p tmp/video-480p.mp4
