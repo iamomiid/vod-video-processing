@@ -6,7 +6,7 @@ Make sure that `ffmpeg` and `Bento4` tools are installed and included in PATH.
 
 Set DASH audio output bitrate to maximum quality bitrate. Currently it is set to `720p` and `256k`.
 
-## Video and Audio Standards
+## Recommended Video and Audio Bitrates
 
 |    Quality     | Video Bitrate | Audio Bitrate |
 | :------------: | :-----------: | :-----------: |
@@ -19,12 +19,14 @@ Set DASH audio output bitrate to maximum quality bitrate. Currently it is set to
 |   1440p(2K)    |     8000k     |     320k      |
 |   2160p(4K)    |    18000k     |     320k      |
 
+This chart is [ArvanCloud default profile](https://www.arvancloud.com/help/fa/article/360033982534-چگونه-در-پنل-ویدیو-آروان،-یک-پروفایل-اضافه-کنید؟). I also recommend using [YouTube recommended settings](https://support.google.com/youtube/answer/1722171?hl=en) for cases with better bandwidth.
+
 Video height is calculated based on video ratio and width.
 
-## DASH Server
+## License Server
 
-Navigate to `dash-server`. Install dependencies ( `yarn install` ) and start( `yarn start` ).
+Navigate to `server`. Install dependencies ( `yarn install` ) and start( `yarn start` ).
 
-It creates a simple server and handles clearkey licensing. For more information, check [this link](https://www.w3.org/TR/encrypted-media/).
+It creates a simple server and handles clearkey licensing for both MPEG DASH and HLS. For more information, check [this link](https://www.w3.org/TR/encrypted-media/).
 
 As an alternative, you can use `getLicense` method in player config.
